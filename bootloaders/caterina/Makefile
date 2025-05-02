@@ -49,12 +49,12 @@
 # USB vendor ID (VID)
 # reuse of this VID by others is forbidden by USB-IF
 # official Arduino LLC VID
-# VID = 0x2341
+VID = 0x2341
 
 
 # USB product ID (PID)
 # official Leonardo PID
-# PID = 0x0036
+PID = 0x0036
 # official Micro PID
 # PID = 0x0037
 # official Esplora PID
@@ -127,7 +127,8 @@ OBJDIR = .
 
 
 # Path to the LUFA library
-LUFA_PATH = ../../../../../../LUFA/LUFA-111009
+#LUFA_PATH = ../../../../../../LUFA/LUFA-111009
+LUFA_PATH = ./lufa-LUFA-111009
 
 
 # LUFA library compile-time options and predefined tokens
@@ -187,7 +188,7 @@ DEBUG = dwarf-2
 
 
 # List any extra directories to look for include files here.
-#     Each directory must be separated by a space.
+#     Each directory must be seperated by a space.
 #     Use forward slashes for directory separators.
 #     For a directory that has spaces, enclose it in quotes.
 EXTRAINCDIRS = $(LUFA_PATH)/
@@ -327,7 +328,7 @@ MATH_LIB = -lm
 
 
 # List any extra directories to look for libraries here.
-#     Each directory must be separated by a space.
+#     Each directory must be seperated by a space.
 #     Use forward slashes for directory separators.
 #     For a directory that has spaces, enclose it in quotes.
 EXTRALIBDIRS =

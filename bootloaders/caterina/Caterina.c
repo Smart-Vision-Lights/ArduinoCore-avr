@@ -100,9 +100,13 @@ void LEDPulse(void)
 		p = 254-p;
 	p += p;
 	if (((uint8_t)LLEDPulse) > p)
+	{
 		L_LED_OFF();
+	}	
 	else
-		L_LED_ON();
+	{
+		L_USB_PIN_ON();
+	}
 }
 
 /** Main program entry point. This routine configures the hardware required by the bootloader, then continuously
@@ -120,6 +124,7 @@ int main(void)
 
 	/* Watchdog may be configured with a 15 ms period so must disable it before going any further */
 	wdt_disable();
+
 	
 	if (mcusr_state & (1<<EXTRF)) {
 		// External reset -  we should continue to self-programming mode.
@@ -142,6 +147,7 @@ int main(void)
 	
 	while (RunBootloader)
 	{
+		L_USB_PIN_ON();
 		CDC_Task();
 		USB_USBTask();
 		/* Time out and start the sketch if one is present */
@@ -177,6 +183,9 @@ void SetupHardware(void)
 	L_LED_OFF();
 	TX_LED_OFF();
 	RX_LED_OFF();
+	/* Enable our USB isolator so we can actually upload code if we want [SVL] */
+	USB_PIN_SETUP();
+	//L_USB_PIN_ON();
 	
 	/* Initialize TIMER1 to handle bootloader timeout and LED tasks.  
 	 * With 16 MHz clock and 1/64 prescaler, timer 1 is clocked at 250 kHz
